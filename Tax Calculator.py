@@ -85,32 +85,45 @@ TAX_RATE7 = 0.396
 
 # This progam displays the simple tax for single and married
 # filers given a set of incomes
+
+# Design
 def main():
-  # Explain what program does
+  # Explain what this program does
   print("This program computes a tax table for single and married filers")
-  
+
+  # Priming Read:
+  #  get an input from a user to decide if the user is single or married
   status = input("Enter your marital status or press <Enter> to quit:  ")
 
+  # Continuation Loop:
+  #   Keeping a program going until a user wants to quit(hit <Enter>)
   while status:
-    
+
+    # Validation Loop for status: to force the user to give a valid input
+    #   Whether the input is not single and married
     while not (status == 'single' or status == 'married'):
       print("Your marital status is not valid")
+
+      # Once the Validation is done, convert the value into an integer
       status = input("Enter your valid status between single and married:  ")
 
     
     income_str = input("Please your annual income:  ")
-
+    
+    # Validation Loop for income: to force the user to give a valid input
+    #   Whether the input is an integer and is greater than 0
     while not (income_str.isdigit() and int(income_str) >= 0):
       print("Your income is not a valid number")
       income_str = input("Enter your valid annual income")
-
+      
+    # Convert the value into an integer
     income = int(income_str)
 
 
     # Use nested and chained conditionals to compute tax
     ### YOUR CODE HERE ###
 
-    # To compute data for Single when i equals 0
+    # if the user chose the status as single
     if status == 'single':    
     
       if (income < SINGLE_BRACKET1):
@@ -134,7 +147,7 @@ def main():
       else:
         tax = BASE_SINGLE6 + (income - SINGLE_BRACKET6) * TAX_RATE7
           
-    # To compute data for Married when i equals 1      
+    # else the user chose the status as married      
     else:
       
       if (income < MARRIED_BRACKET1):
@@ -157,10 +170,13 @@ def main():
 
       else:
         tax = BASE_MARRIED6 + (income - MARRIED_BRACKET6) * TAX_RATE7
-    
+
+    # print out the sentence with the calculated outcome with % specifiers
     print("Tax for %7s filer, with income $%9.2f = $%9.2f"
           %(status, income, tax))
-
+    
+    # Continuation Read:
+    #   Keeps the program going as long as user enters input
     status = input("Enter your marital status or press <Enter> to quit:  ")
             
 main()
